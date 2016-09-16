@@ -94,6 +94,13 @@ public boolean execute(String action, JSONArray args, CallbackContext callbackCo
         
         return true;
     }
+    else if (action.equals("scanner_isDecoding")){
+        Log.d(TAG, "++Is Decoding");
+        callbackContext.success(this.mScanner.isDecoding());
+        Log.d(TAG, "--Is Decoding");
+        
+        return true;
+    }
     // TODO: replace with  android -> javascript async call instead of javascript->android sync call
     else if (action.equals("scanner_getDecodeCallback")){
         Log.d(TAG, "Start Decode");

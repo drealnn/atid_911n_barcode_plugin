@@ -13,6 +13,9 @@ module.exports =  {
 	stopDecode : function(successCallback, errorCallback){
 		exec(successCallback, errorCallback, "Barcode", 'scanner_stopDecode', []);
 	},
+	isDecoding : function(successCallback, errorCallback){
+		exec(successCallback, errorCallback, "Barcode", 'scanner_isDecoding', []);
+	},
 	wakeup : function(successCallback, errorCallback){
 		exec(successCallback, errorCallback, "Barcode", 'wakeup_scanner', []);
 	},
