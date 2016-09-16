@@ -129,7 +129,7 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     this.mScanner.setEventListener(this);
     this.adapterBarcode = new BarcodeListAdapter(this);
 
-    Log.i(TAG, 'Scanning device initialized');
+    Log.i(TAG, "Scanning device initialized");
 }
 
 
