@@ -1,5 +1,6 @@
 package com.atid.app.mybarcode;
 
+import om.atid.app.mybarcode.R;
 import com.atid.lib.dev.ATScanManager;
 import com.atid.lib.dev.ATScanner;
 import com.atid.lib.dev.barcode.type.BarcodeType;
@@ -168,6 +169,12 @@ public void onDecodeEvent(BarcodeType type, String barcode) {
     }
 
     
+}
+
+@Override
+public void onStateChanged(EventType state) {
+    
+    Log.d(TAG, "EventType : " + state.toString());
 }
 
 // Beep & Vibrate
