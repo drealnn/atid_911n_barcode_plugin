@@ -185,7 +185,7 @@ private void beep(boolean isSuccess) {
     }
 }
 
-private class ScanResult(){
+private class ScanResult {
    public CallbackContext scanResultCallback; 
    public BarcodeType scanResultType;
    public String scanResultBarcode;
