@@ -96,7 +96,7 @@ public boolean execute(String action, JSONArray args, CallbackContext callbackCo
     }
     else if (action.equals("scanner_isDecoding")){
         Log.d(TAG, "++Is Decoding");
-        callbackContext.success(this.mScanner.isDecoding());
+        callbackContext.success("" + this.mScanner.isDecoding());
         Log.d(TAG, "--Is Decoding");
         
         return true;
