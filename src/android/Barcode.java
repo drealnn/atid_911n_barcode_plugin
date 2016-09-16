@@ -5,7 +5,6 @@ import com.atid.lib.dev.ATScanner;
 import com.atid.lib.dev.barcode.type.BarcodeType;
 import com.atid.lib.dev.barcode.type.EventType;
 import com.atid.lib.dev.event.BarcodeEventListener;
-import com.atid.app.mybarcode.adapter.BarcodeListAdapter;
 import com.atid.lib.system.device.type.BarcodeModuleType;
 
 import android.media.AudioManager;
@@ -28,17 +27,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.content.Context;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.*
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class Barcode extends CordovaPlugin implements Button.OnClickListener,
-        BarcodeEventListener {
+public class Barcode extends CordovaPlugin implements BarcodeEventListener {
 
 private static final String TAG = "MainActivity"; 
 
@@ -49,7 +49,7 @@ private int mBeepSuccess;
 private int mBeepFail;
 private Vibrator mVibrator;
 
-private BarcodeListAdapter adapterBarcode;
+
 ScanResult mScanResult;
 
 Context context=this.cordova.getActivity().getApplicationContext();
@@ -122,12 +122,11 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     
     // Initialize Sound Pool
     this.mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
-    this.mBeepSuccess = this.mSoundPool.load(this, R.raw.success, 1);
-    this.mBeepFail = this.mSoundPool.load(this, R.raw.fail, 1);
+    this.mBeepSuccess = this.mSoundPool.load(context, R.raw.success, 1);
+    this.mBeepFail = this.mSoundPool.load(context, R.raw.fail, 1);
     // Initialize Vibrator
     /*this.mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);*/
     this.mScanner.setEventListener(this);
-    this.adapterBarcode = new BarcodeListAdapter(this);
 
     Log.i(TAG, "Scanning device initialized");
 }

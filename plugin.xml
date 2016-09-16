@@ -27,7 +27,6 @@
         </js-module>
 
         <source-file src="src/android/Barcode.java" target-dir="src/com/atid/app/mybarcode" />
-        <source-file src="src/android/BarcodeListAdapter.java" target-dir="src/com/atid/app/mybarcode/adapter" />
 
         <lib-file src="src/android/libs/atid.dev.barcode.jar" />
         <lib-file src="src/android/libs/atid.system.comm.jar" />
