@@ -1,6 +1,6 @@
 package com.atid.app.mybarcode;
 
-import com.atid.app.mybarcode.R;
+import com.atid.app.R;
 import com.atid.lib.dev.ATScanManager;
 import com.atid.lib.dev.ATScanner;
 import com.atid.lib.dev.barcode.type.BarcodeType;
