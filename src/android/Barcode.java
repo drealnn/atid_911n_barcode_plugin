@@ -65,21 +65,21 @@ public boolean execute(String action, JSONArray args, CallbackContext callbackCo
         this.deinitalize();
         return true;
     }
-    else if (action.equals('wakeup_scanner')){
+    else if (action.equals("wakeup_scanner")){
         Log.d(TAG, "+- wakeup scanner");
         
         if(mScanner != null)
             ATScanManager.wakeUp();
         return true;
     }
-    else if (action.equals('sleep_scanner')){
+    else if (action.equals("sleep_scanner")){
         Log.d(TAG, "+- sleep scanner");
         if(mScanner != null) {
             ATScanManager.sleep();
         }
         return true;
     }
-    else if (action.equals('scanner_startDecode')){
+    else if (action.equals("scanner_startDecode")){
         Log.d(TAG, "++Start Decode");
         mScanResult = null;
         this.mScanner.startDecode();
@@ -87,7 +87,7 @@ public boolean execute(String action, JSONArray args, CallbackContext callbackCo
         
         return true;
     }
-    else if (action.equals('scanner_stopDecode')){
+    else if (action.equals("scanner_stopDecode")){
         Log.d(TAG, "++Stop Decode");
         this.mScanner.stopDecode();
         Log.d(TAG, "--Stop Decode");
@@ -95,7 +95,7 @@ public boolean execute(String action, JSONArray args, CallbackContext callbackCo
         return true;
     }
     // TODO: replace with  android -> javascript async call instead of javascript->android sync call
-    else if (action.equals('scanner_getDecodeCallback')){
+    else if (action.equals("scanner_getDecodeCallback")){
         Log.d(TAG, "Start Decode");
         if (mScanResult != null)
         {
@@ -116,7 +116,7 @@ public boolean execute(String action, JSONArray args, CallbackContext callbackCo
 public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
     if ((this.mScanner = ATScanManager.getInstance( BarcodeModuleType.AT2D4710M_1)) == null) {
-            Log.e(TAG, 'Failure to find scanning device. Aborting...');
+            Log.e(TAG, "Failure to find scanning device. Aborting...");
             return;
     }
     
