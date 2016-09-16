@@ -121,9 +121,9 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     }
     
     // Initialize Sound Pool
-    this.mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
-    this.mBeepSuccess = this.mSoundPool.load(context, R.raw.success, 1);
-    this.mBeepFail = this.mSoundPool.load(context, R.raw.fail, 1);
+    //this.mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+    //this.mBeepSuccess = this.mSoundPool.load(context, R.raw.success, 1);
+    //this.mBeepFail = this.mSoundPool.load(context, R.raw.fail, 1);
     // Initialize Vibrator
     /*this.mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);*/
     this.mScanner.setEventListener(this);
