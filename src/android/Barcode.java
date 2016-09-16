@@ -52,7 +52,7 @@ private Vibrator mVibrator;
 
 ScanResult mScanResult;
 
-Context context=this.cordova.getActivity().getApplicationContext();
+//Context context=this.cordova.getActivity().getApplicationContext();
 
 @Override
 public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
