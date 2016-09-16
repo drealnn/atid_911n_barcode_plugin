@@ -34,8 +34,8 @@
         <lib-file src="src/android/libs/atid.system.device.jar" />
         <lib-file src="src/android/libs/atid.util.jar" />
 
-        <lib-file src="src/android/libs/armeabi/libserial_port.so" arch="device" />
-        <lib-file src="src/android/libs/armeabi/libsystem_control.so" arch="device" />
+        <source-file src="src/android/libs/armeabi/libserial_port.so" target-dir="libs/armeabi" />
+        <source-file src="src/android/libs/armeabi/libsystem_control.so" target-dir="libs/armeabi" />
 
         <resource-file src="src/android/res/raw/fail.wav" target="res/raw/fail.wav" />
         <resource-file src="src/android/res/raw/success.wav" target="res/raw/success.wav" />
