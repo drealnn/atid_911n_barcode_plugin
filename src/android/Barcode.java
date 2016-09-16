@@ -1,6 +1,5 @@
 package com.atid.app.mybarcode;
 
-import android.R;
 import com.atid.lib.dev.ATScanManager;
 import com.atid.lib.dev.ATScanner;
 import com.atid.lib.dev.barcode.type.BarcodeType;
@@ -159,7 +158,7 @@ public void onDecodeEvent(BarcodeType type, String barcode) {
     mScanResult = new ScanResult();
     mScanResult.scanResultType = type;
     mScanResult.scanResultBarcode = barcode;
-
+    /*
     if(type != BarcodeType.NoRead){
         //int position = this.adapterBarcode.addItem(type, barcode);
         //this.lstBarcodeList.setSelection(position);
@@ -167,7 +166,7 @@ public void onDecodeEvent(BarcodeType type, String barcode) {
     }else{
         beep(false);
     }
-
+*/
     
 }
 
@@ -177,6 +176,7 @@ public void onStateChanged(EventType state) {
     Log.d(TAG, "EventType : " + state.toString());
 }
 
+/*
 // Beep & Vibrate
 private void beep(boolean isSuccess) {
     Log.d(TAG, "@@@@ DEBUG. Play beep....!!!!");
@@ -190,7 +190,7 @@ private void beep(boolean isSuccess) {
     }catch(Exception ex){
     }
 }
-
+*/
 private class ScanResult {
    public CallbackContext scanResultCallback; 
    public BarcodeType scanResultType;
