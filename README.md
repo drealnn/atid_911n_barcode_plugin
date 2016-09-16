@@ -24,11 +24,12 @@ atid.barcode {
   	}
 }
 ```
-```
+
 Tested: startDecode, stopDecode, isDecoding. onDecodeEvent in native.
 
-
 TODO: add in functionality to interface with atid scanner handle using the keyup/keydown events (looking for a way to do this from the javascript side)
+
 TODO: implement asynchronous call from native side to javascript side when onDecodeEvent is called instead of the other way around.
+
 TODO: refactor methods so that callback functions don't have to be explicitly defined by the javascript programmer.
-```
+
