@@ -226,6 +226,11 @@ public boolean onKeyUp(int keyCode, KeyEvent event) {
     return super.onKeyUp(keyCode, event);
 }
 
+@Override
+public void onClick(View v) {
+    
+}
+
 
 private class ScanResult {
    public CallbackContext scanResultCallback; 
