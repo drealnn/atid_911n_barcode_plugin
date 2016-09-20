@@ -38,7 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class Barcode extends CordovaPlugin implements BarcodeEventListener {
+public class Barcode extends CordovaPlugin implements BarcodeEventListener, Button.OnClickListener {
 
 private static final String TAG = "MainActivity"; 
 
@@ -198,6 +198,35 @@ private void beep(boolean isSuccess) {
     }
 }
 */
+
+@Override
+public boolean onKeyDown(int keyCode, KeyEvent event) {
+    Log.d(TAG, "DEBUG. onKeyDown(" + keyCode + ")");
+    if ((keyCode == KeyEvent.KEYCODE_SOFT_RIGHT
+            || keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT || keyCode == KeyEvent.KEYCODE_SHIFT_LEFT)
+            && event.getRepeatCount() <= 0 && !this.mScanner.isDecoding()) {
+
+        Log.d(TAG, "DEBUG. onKeyDown(" + keyCode + ")");
+
+        
+    }
+    return super.onKeyDown(keyCode, event);
+}
+
+@Override
+public boolean onKeyUp(int keyCode, KeyEvent event) {
+    Log.d(TAG, "DEBUG. onKeyUp(" + keyCode + ")");
+    if ((keyCode == KeyEvent.KEYCODE_SOFT_RIGHT
+            || keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT || keyCode == KeyEvent.KEYCODE_SHIFT_LEFT)
+            && this.mScanner.isDecoding()) {
+
+        Log.d(TAG, "DEBUG. onKeyUp(" + keyCode + ")");
+
+    }
+    return super.onKeyUp(keyCode, event);
+}
+
+
 private class ScanResult {
    public CallbackContext scanResultCallback; 
    public BarcodeType scanResultType;
