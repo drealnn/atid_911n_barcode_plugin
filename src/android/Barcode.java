@@ -48,7 +48,9 @@ private SoundPool mSoundPool;
 private int mBeepSuccess;
 private int mBeepFail;
 private Vibrator mVibrator;
-
+private CallbackContext keyup_callback = null;
+private CallbackContext keydown_callback = null;
+private View currentView = null;
 
 ScanResult mScanResult;
 
@@ -56,6 +58,9 @@ ScanResult mScanResult;
 
 @Override
 public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+    PluginResult result = new PluginResult(PluginResult.Status.NO_RESULT);
+    result.setKeepCallback(true);
+
     if (action.equals("echo")) {
         String message = args.getString(0);
         this.echo(message, callbackContext);
@@ -116,6 +121,12 @@ public boolean execute(String action, JSONArray args, CallbackContext callbackCo
         
         return true;
     }
+    else if(action.equalsIgnoreCase("keyDown")){
+            this.keydown_callback = callbackContext;
+    }
+     else if(action.equalsIgnoreCase("keyUp")){
+            this.keyup_callback = callbackContext;
+    }
     return false;
 }
 
@@ -134,6 +145,15 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     // Initialize Vibrator
     /*this.mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);*/
     this.mScanner.setEventListener(this);
+
+    this.currentView.setOnKeyListener(
+                new View.OnKeyListener(){
+                    @Override
+                    public boolean onKey(View view, int keyCode, KeyEvent event){
+                        return doKey(view, keyCode, event);
+                    }
+                }
+            );
 
     Log.i(TAG, "Scanning device initialized");
 }
@@ -199,8 +219,9 @@ private void beep(boolean isSuccess) {
 }
 */
 
- @Override
-public boolean onKey(View v, int keyCode, KeyEvent event) {
+public boolean doKey(View v, int keyCode, KeyEvent event) {
+    
+Log.e(TAG, "triggering key event");
     if (event.getAction() == KeyEvent.ACTION_UP) {
         KeyUp(keyCode, event);
     }
