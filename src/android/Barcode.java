@@ -38,7 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class Barcode extends CordovaPlugin implements BarcodeEventListener, Button.OnClickListener {
+public class Barcode extends CordovaPlugin implements BarcodeEventListener, OnKeyListener {
 
 private static final String TAG = "MainActivity"; 
 
@@ -199,37 +199,39 @@ private void beep(boolean isSuccess) {
 }
 */
 
-@Override
-public boolean onKeyDown(int keyCode, KeyEvent event) {
-    Log.d(TAG, "DEBUG. onKeyDown(" + keyCode + ")");
-    if ((keyCode == KeyEvent.KEYCODE_SOFT_RIGHT
-            || keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT || keyCode == KeyEvent.KEYCODE_SHIFT_LEFT)
-            && event.getRepeatCount() <= 0 && !this.mScanner.isDecoding()) {
-
-        Log.d(TAG, "DEBUG. onKeyDown(" + keyCode + ")");
-
-        
+ @Override
+public boolean onKey(View v, int keyCode, KeyEvent event) {
+    if (event.getAction() == KeyEvent.ACTION_UP) {
+        KeyUp(keyCode, event);
     }
-    return super.onKeyDown(keyCode, event);
-}
-
-@Override
-public boolean onKeyUp(int keyCode, KeyEvent event) {
-    Log.d(TAG, "DEBUG. onKeyUp(" + keyCode + ")");
-    if ((keyCode == KeyEvent.KEYCODE_SOFT_RIGHT
-            || keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT || keyCode == KeyEvent.KEYCODE_SHIFT_LEFT)
-            && this.mScanner.isDecoding()) {
-
-        Log.d(TAG, "DEBUG. onKeyUp(" + keyCode + ")");
-
+    else if (event.getAction() == KeyEvent.ACTION_DOWN) {
+        KeyDown(keyCode, event);
     }
-    return super.onKeyUp(keyCode, event);
+    return false;
 }
 
-@Override
-public void onClick(View v) {
-    
+private boolean KeyDown(int keyCode, KeyEvent event){
+    //if(keydown_callback == null){
+      //  return true;
+    //}
+    //PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
+    //result.setKeepCallback(true);
+    //keydown_callback.sendPluginResult(result);
+    Log.e(TAG, "key down pressed " + keyCode);
+    return false;
 }
+
+private boolean KeyUp(int keyCode, KeyEvent event){
+    //if(keyup_callback == null){
+      //  return true;
+    //}
+    //PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
+    //result.setKeepCallback(true);
+    //keyup_callback.sendPluginResult(result);
+    Log.e(TAG, "key up pressed " + keyCode);
+    return false;
+}
+
 
 
 private class ScanResult {
