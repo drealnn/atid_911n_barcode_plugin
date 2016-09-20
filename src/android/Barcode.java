@@ -38,7 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class Barcode extends CordovaPlugin implements BarcodeEventListener, OnKeyListener {
+public class Barcode extends CordovaPlugin implements BarcodeEventListener, View.OnKeyListener {
 
 private static final String TAG = "MainActivity"; 
 
