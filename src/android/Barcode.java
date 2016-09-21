@@ -238,6 +238,13 @@ private boolean KeyDown(int keyCode, KeyEvent event){
     //PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
     //result.setKeepCallback(true);
     //keydown_callback.sendPluginResult(result);
+    String str = "";
+    if(event != null){
+        str = String.valueOf((char)event.getUnicodeChar());
+    }
+    else{
+        str = String.valueOf(Character.toChars(keyCode)[0]);
+    }
     Log.e(TAG, "key down pressed " + keyCode);
     PluginResult result = new PluginResult(PluginResult.Status.OK, str);
             result.setKeepCallback(true);
@@ -252,6 +259,13 @@ private boolean KeyUp(int keyCode, KeyEvent event){
     //PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
     //result.setKeepCallback(true);
     //keyup_callback.sendPluginResult(result);
+    String str = "";
+    if(event != null){
+        str = String.valueOf((char)event.getUnicodeChar());
+    }
+    else{
+        str = String.valueOf(Character.toChars(keyCode)[0]);
+    }
     Log.e(TAG, "key up pressed " + keyCode);
     PluginResult result = new PluginResult(PluginResult.Status.OK, str);
             result.setKeepCallback(true);
