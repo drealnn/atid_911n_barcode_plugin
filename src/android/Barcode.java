@@ -145,7 +145,7 @@ public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     // Initialize Vibrator
     /*this.mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);*/
     this.mScanner.setEventListener(this);
-
+    this.currentView = webView.getView();
     this.currentView.setOnKeyListener(
                 new View.OnKeyListener(){
                     @Override
