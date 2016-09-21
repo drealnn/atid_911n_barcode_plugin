@@ -22,8 +22,12 @@
         </config-file>
 
 
-        <js-module src="www/android/atid.js" name="atid">
+        <js-module src="www/android/atid_barcode.js" name="atid_barcode">
             <clobbers target="atid.barcode" />
+        </js-module>
+
+        <js-module src="www/android/atid.js" name="atid">
+            <clobbers target="atid" />
         </js-module>
 
         <source-file src="src/android/Barcode.java" target-dir="src/com/atid/app/mybarcode" />

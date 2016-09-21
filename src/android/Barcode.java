@@ -121,10 +121,10 @@ public boolean execute(String action, JSONArray args, CallbackContext callbackCo
         
         return true;
     }
-    else if(action.equalsIgnoreCase("keyDown")){
+    else if(action.equalsIgnoreCase("register_keyDown")){
             this.keydown_callback = callbackContext;
     }
-     else if(action.equalsIgnoreCase("keyUp")){
+     else if(action.equalsIgnoreCase("register_keyUp")){
             this.keyup_callback = callbackContext;
     }
     return false;
@@ -221,7 +221,7 @@ private void beep(boolean isSuccess) {
 
 public boolean doKey(View v, int keyCode, KeyEvent event) {
     
-Log.e(TAG, "triggering key event");
+Log.i(TAG, "triggering key event");
     if (event.getAction() == KeyEvent.ACTION_UP) {
         return KeyUp(keyCode, event);
     }
@@ -238,18 +238,31 @@ private boolean KeyDown(int keyCode, KeyEvent event){
     //PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
     //result.setKeepCallback(true);
     //keydown_callback.sendPluginResult(result);
-    String str = "";
-    if(event != null){
-        str = String.valueOf((char)event.getUnicodeChar());
+    Log.i(TAG, "key down pressed " + keyCode);
+
+    if (this.keydown_callback == null)
+        return false;
+    
+    try {
+        String str = "";
+        if (event != null) {
+            str = String.valueOf((char) event.getUnicodeChar());
+        } else {
+            str = String.valueOf(Character.toChars(keyCode)[0]);
+        }
+        
+        PluginResult result = new PluginResult(PluginResult.Status.OK, str);
+        result.setKeepCallback(true);
+        this.keydown_callback.sendPluginResult(result);
+        return true;
+    } catch(Exception e)
+    {
+        e.printStackTrace();
+        PluginResult result = new PluginResult(PluginResult.Status.ERROR, "Error in handling key event");
+        result.setKeepCallback(true);
+        this.keydown_callback.sendPluginResult(result);
+        return false;
     }
-    else{
-        str = String.valueOf(Character.toChars(keyCode)[0]);
-    }
-    Log.e(TAG, "key down pressed " + keyCode);
-    PluginResult result = new PluginResult(PluginResult.Status.OK, str);
-            result.setKeepCallback(true);
-            this.keydown_callback.sendPluginResult(result);
-    return true;
 }
 
 private boolean KeyUp(int keyCode, KeyEvent event){
@@ -259,18 +272,30 @@ private boolean KeyUp(int keyCode, KeyEvent event){
     //PluginResult result = new PluginResult(PluginResult.Status.OK, Integer.toString(keyCode));
     //result.setKeepCallback(true);
     //keyup_callback.sendPluginResult(result);
-    String str = "";
-    if(event != null){
-        str = String.valueOf((char)event.getUnicodeChar());
+    Log.i(TAG, "key up pressed " + keyCode);
+    if (this.keyup_callback == null)
+        return false;
+    
+    try {
+        String str = "";
+        if (event != null) {
+            str = String.valueOf((char) event.getUnicodeChar());
+        } else {
+            str = String.valueOf(Character.toChars(keyCode)[0]);
+        }
+        
+        PluginResult result = new PluginResult(PluginResult.Status.OK, str);
+        result.setKeepCallback(true);
+        this.keyup_callback.sendPluginResult(result);
+        return true;
+    } catch(Exception e)
+    {
+        e.printStackTrace();
+        PluginResult result = new PluginResult(PluginResult.Status.ERROR, "Error in handling key event");
+        result.setKeepCallback(true);
+        this.keyup_callback.sendPluginResult(result);
+        return false;
     }
-    else{
-        str = String.valueOf(Character.toChars(keyCode)[0]);
-    }
-    Log.e(TAG, "key up pressed " + keyCode);
-    PluginResult result = new PluginResult(PluginResult.Status.OK, str);
-            result.setKeepCallback(true);
-            this.keyup_callback.sendPluginResult(result);
-    return true;
 }
 
 
