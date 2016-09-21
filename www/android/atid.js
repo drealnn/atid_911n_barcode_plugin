@@ -1,4 +1,4 @@
-ar cordova = require('cordova'),
+var cordova = require('cordova'),
     exec = require('cordova/exec');
 
 module.exports =  {

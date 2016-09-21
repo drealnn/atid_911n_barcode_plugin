@@ -50,6 +50,7 @@ private int mBeepFail;
 private Vibrator mVibrator;
 private CallbackContext keyup_callback = null;
 private CallbackContext keydown_callback = null;
+private CallbackContext getDecode_callback = null;
 private View currentView = null;
 
 ScanResult mScanResult;
@@ -123,9 +124,15 @@ public boolean execute(String action, JSONArray args, CallbackContext callbackCo
     }
     else if(action.equalsIgnoreCase("register_keyDown")){
             this.keydown_callback = callbackContext;
+            return true;
     }
-     else if(action.equalsIgnoreCase("register_keyUp")){
+    else if(action.equalsIgnoreCase("register_keyUp")){
             this.keyup_callback = callbackContext;
+            return true;
+    }
+    else if(action.equalsIgnoreCase("register_decode")){
+            this.getDecode_callback = callbackContext;
+            return true;
     }
     return false;
 }
@@ -185,15 +192,36 @@ public void onDecodeEvent(BarcodeType type, String barcode) {
     mScanResult = new ScanResult();
     mScanResult.scanResultType = type;
     mScanResult.scanResultBarcode = barcode;
-    /*
+
+
+    
     if(type != BarcodeType.NoRead){
         //int position = this.adapterBarcode.addItem(type, barcode);
         //this.lstBarcodeList.setSelection(position);
-        beep(true);
+        String str = "{\'type\': \'" + type + "\' , \'barcode\': \'" + barcode + "\' }";
+        PluginResult result;
+        try {
+            result = new PluginResult(PluginResult.Status.OK, new JSONObject(str));
+        } catch(JSONException e){
+            e.printStackTrace();
+            result = new PluginResult(PluginResult.Status.ERROR, "Error in constructing json for success decode callback");
+        }
+        result.setKeepCallback(true);
+        this.getDecode_callback.sendPluginResult(result);
+        //this.getDecode_callback = null;
+        return;
+         //result.setKeepCallback(false);
+        //beep(true);
     }else{
-        beep(false);
+        PluginResult result = new PluginResult(PluginResult.Status.ERROR, "Barcode not found");
+        result.setKeepCallback(true);
+        this.getDecode_callback.sendPluginResult(result);
+        //this.getDecode_callback = null;
+         //result.setKeepCallback(false);
+        //beep(false);
+        return;
     }
-*/
+
     
 }
 
@@ -251,7 +279,7 @@ private boolean KeyDown(int keyCode, KeyEvent event){
             str = String.valueOf(Character.toChars(keyCode)[0]);
         }
         
-        PluginResult result = new PluginResult(PluginResult.Status.OK, str);
+        PluginResult result = new PluginResult(PluginResult.Status.OK, keyCode + "");
         result.setKeepCallback(true);
         this.keydown_callback.sendPluginResult(result);
         return true;
@@ -284,7 +312,7 @@ private boolean KeyUp(int keyCode, KeyEvent event){
             str = String.valueOf(Character.toChars(keyCode)[0]);
         }
         
-        PluginResult result = new PluginResult(PluginResult.Status.OK, str);
+        PluginResult result = new PluginResult(PluginResult.Status.OK, keyCode + "");
         result.setKeepCallback(true);
         this.keyup_callback.sendPluginResult(result);
         return true;

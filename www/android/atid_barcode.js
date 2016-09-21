@@ -25,10 +25,13 @@ module.exports =  {
 	deinitialize : function(successCallback, errorCallback){
 		exec(successCallback, errorCallback, "Barcode", 'deinitialize_scanner', []);
 	},
-	registerKeyUp : function(successCallback, errorCallback){
+	onDecode : function(successCallback, errorCallback){
+		exec(successCallback, errorCallback, "Barcode", 'register_decode', []);
+	},
+	onKeyUp : function(successCallback, errorCallback){
 		exec(successCallback, errorCallback, "Barcode", 'register_keyUp', []);
 	},
-	registerKeyDown : function(successCallback, errorCallback){
+	onKeyDown : function(successCallback, errorCallback){
 		exec(successCallback, errorCallback, "Barcode", 'register_keyDown', []);
 	}
 
