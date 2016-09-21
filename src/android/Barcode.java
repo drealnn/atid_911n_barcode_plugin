@@ -38,7 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class Barcode extends CordovaPlugin implements BarcodeEventListener, View.OnKeyListener {
+public class Barcode extends CordovaPlugin implements BarcodeEventListener {
 
 private static final String TAG = "MainActivity"; 
 
@@ -223,10 +223,10 @@ public boolean doKey(View v, int keyCode, KeyEvent event) {
     
 Log.e(TAG, "triggering key event");
     if (event.getAction() == KeyEvent.ACTION_UP) {
-        KeyUp(keyCode, event);
+        return KeyUp(keyCode, event);
     }
     else if (event.getAction() == KeyEvent.ACTION_DOWN) {
-        KeyDown(keyCode, event);
+        return KeyDown(keyCode, event);
     }
     return false;
 }
@@ -239,7 +239,10 @@ private boolean KeyDown(int keyCode, KeyEvent event){
     //result.setKeepCallback(true);
     //keydown_callback.sendPluginResult(result);
     Log.e(TAG, "key down pressed " + keyCode);
-    return false;
+    PluginResult result = new PluginResult(PluginResult.Status.OK, str);
+            result.setKeepCallback(true);
+            this.keydown_callback.sendPluginResult(result);
+    return true;
 }
 
 private boolean KeyUp(int keyCode, KeyEvent event){
@@ -250,7 +253,10 @@ private boolean KeyUp(int keyCode, KeyEvent event){
     //result.setKeepCallback(true);
     //keyup_callback.sendPluginResult(result);
     Log.e(TAG, "key up pressed " + keyCode);
-    return false;
+    PluginResult result = new PluginResult(PluginResult.Status.OK, str);
+            result.setKeepCallback(true);
+            this.keyup_callback.sendPluginResult(result);
+    return true;
 }
 
 
